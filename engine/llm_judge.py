@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class LLMJudge:
-    def __init__(self, openai_model: str = "gpt-4o-mini", gemini_model: str = "gemini-2.0-flash"):
+    def __init__(self, openai_model: str = "gpt-4o-mini", gemini_model: str = "gemini-2.0-flash-lite"):
         # Setup OpenAI
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
         self.openai_client = AsyncOpenAI(api_key=self.openai_api_key) if self.openai_api_key else None
