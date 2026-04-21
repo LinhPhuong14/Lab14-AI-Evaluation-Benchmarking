@@ -25,7 +25,6 @@ Thumbs.db
 
 # Project specific
 reports/
-data/golden_set.jsonl
 
 # Testing & Coverage
 .coverage
