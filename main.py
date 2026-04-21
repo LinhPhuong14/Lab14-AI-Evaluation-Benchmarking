@@ -5,6 +5,7 @@ import time
 from engine.runner import BenchmarkRunner
 from agent.main_agent import MainAgent
 from engine.retrieval_eval import RetrievalEvaluator
+from engine.llm_judge import LLMJudge
 
 class RetrievalMetricsEvaluator:
     """
@@ -28,13 +29,6 @@ class RetrievalMetricsEvaluator:
             "retrieval": {"hit_rate": hit, "mrr": mrr},
         }
 
-class MultiModelJudge:
-    async def evaluate_multi_judge(self, q, a, gt): 
-        return {
-            "final_score": 4.5, 
-            "agreement_rate": 0.8,
-            "reasoning": "Cả 2 model đồng ý đây là câu trả lời tốt."
-        }
 
 async def run_benchmark_with_results(agent_version: str, optimized: bool):
     print(f"[RUN] Khoi dong Benchmark cho {agent_version} (optimized={optimized})...")
@@ -53,7 +47,7 @@ async def run_benchmark_with_results(agent_version: str, optimized: bool):
     runner = BenchmarkRunner(
         MainAgent(optimized=optimized, top_k=3),
         RetrievalMetricsEvaluator(top_k=3),
-        MultiModelJudge(),
+        LLMJudge(),
     )
     results = await runner.run_all(dataset)
 
@@ -89,6 +83,7 @@ async def main():
     print("V1 Score:", v1_summary["metrics"]["avg_score"])
     print("V2 Score:", v2_summary["metrics"]["avg_score"])
     print("Delta:", ("+" if delta >= 0 else "") + f"{delta:.2f}")
+    print("Agreement Rate: %.2f%%" % (v2_summary["metrics"]["agreement_rate"] * 100))
     print("V1 Retrieval: hit@3=%.4f mrr=%.4f" % (v1_summary["metrics"]["avg_hit_rate"], v1_summary["metrics"]["avg_mrr"]))
     print("V2 Retrieval: hit@3=%.4f mrr=%.4f" % (v2_summary["metrics"]["avg_hit_rate"], v2_summary["metrics"]["avg_mrr"]))
 
