@@ -24,7 +24,6 @@ Thumbs.db
 .idea/
 
 # Project specific
-reports/
 
 # Testing & Coverage
 .coverage
