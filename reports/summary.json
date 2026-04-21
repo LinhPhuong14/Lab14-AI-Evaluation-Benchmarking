@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "version": "Agent_V2_Optimized",
+    "total": 60,
+    "elapsed_seconds": 36.14,
+    "timestamp": "2026-04-21 16:53:31"
+  },
+  "metrics": {
+    "avg_score": 2.3417,
+    "hit_rate": 0.6333,
+    "avg_hit_rate": 0.6333,
+    "avg_mrr": 0.6083,
+    "agreement_rate": 0.55
+  },
+  "cost": {
+    "total_tokens": 8088,
+    "estimated_cost_usd": 0.002426
+  }
+}
